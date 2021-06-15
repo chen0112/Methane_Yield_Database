@@ -1,1 +1,1 @@
-#This database built to making notes and can also collect email, user names
+#This database was built to making notes and can also visit email address and user names.
