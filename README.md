@@ -1,1 +1,1 @@
-#This database was built to making notes and can also visit email address and user names.
+#This database was built to record methane yield from different substrates for future predicting methane yields.
