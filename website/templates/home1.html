@@ -1,0 +1,102 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1 align="center">Methane yield from Organic Components</h1>
+<ul class="list-group list-group-flush" id="notes">
+  {% for note in user.notes %}
+  <li class="list-group-item">
+    {{ note.data }}
+    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+  {% endfor %} </ul>
+<ul>
+  {% for methane in user.methane %}
+  <li class="list-group-item">
+    {{ methane.substrates, methane.carbohydrates, methane.protein, methane.lipids }}
+    <button type="button" class="close" onClick="deleteMethane({{ methane.id }})">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+  {% endfor %}
+</ul>
+<form method="POST">
+  <style>
+table, td, th {
+  border: 1px solid black; align:center
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+</style>
+  <h2 style="text-align: center;">Organic Components of Substrates</h2>
+  <table contenteditable="true" style="width:100%" id = 'tb' name='tb'>
+    <thead class='thead-dark' style="text-align:center">
+    <tr>
+      <th scope="col">Substrates</th>
+      <th scope="col">Carbohydrates</th>
+      <th scope="col">Protein</th>
+      <th scope="col">lipids</th>
+          </tr>
+    </thead>
+    <tbody style="text-align:center">
+    <tr>
+      <td>
+        <input type="text" class="form-control" name="substrates" id="substrates" placeholder="substrates">
+      </td>
+      <td>
+        <input type="number" class="form-control" name="'carbohydrates" id="carbohydrates" placeholder="carbohydrates (g/l)">
+      </td>
+      <td>
+        <input type="number" class="form-control" name="'protein" id="protein" placeholder="protein (g/l)">
+      </td>
+      <td>
+        <input type="number" class="form-control" name="'lipids" id="lipids" placeholder="lipids (g/l)">
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <br>
+ <div>
+     <button  style="text-align:center" type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+<br>
+<form method="POST">
+  <textarea name="note" id="note" class="form-control"></textarea>
+  <br>
+  <div>
+    <button style="text-align:center" type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+
+<script>
+var n = 0;
+function addNewRow()
+{
+  n = n + 1;
+  var table  = document.getElementById('tb');
+  var rowCount = table.rows.length;
+  var row = table.insertRow(rowCount);
+  var cell0 = row.insertCell(0);
+  var cell1 = row.insertCell(1);
+  var cell2 = row.insertCell(2);
+  var cell3 = row.insertCell(3);
+  row.style.height = '30px';
+  row.id = n;
+  cell0.innerHTML = row.id;
+  cell1.innerHTML = row.rowIndex;
+  cell4.innerHTML = "<button class = 'close' onClick = 'deleteRow(" + n + ")'>x</button>";
+}
+
+function deleteRow(n)
+{
+  row = document.getElementById(n);
+  document.getElementById('tb').deleteRow(row.rowIndex);
+}
+
+</script>
+
+{% endblock %}
